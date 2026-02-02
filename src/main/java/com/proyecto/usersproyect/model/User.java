@@ -15,7 +15,7 @@ public class User
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //genera los ids automaticamente
-    private int userId;
+    private Integer userId;
 
     @Column(nullable = false, length = 50, unique = true) //length es el maximo de caracteres
     private String username;
