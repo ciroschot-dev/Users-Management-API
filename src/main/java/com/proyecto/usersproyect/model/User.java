@@ -1,13 +1,15 @@
 package com.proyecto.usersproyect.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Entity
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -15,11 +17,18 @@ import lombok.NoArgsConstructor;
 public class User
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //genera los ids automaticamente
     private int userId;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, unique = true) //length es el maximo de caracteres
     private String username;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false, length = 50, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
 }
