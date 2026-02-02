@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 @Entity
 @Table(name = "users")
 @AllArgsConstructor
@@ -28,7 +25,4 @@ public class User
 
     @Column(nullable = false, length = 50, unique = true)
     private String email;
-
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
 }
