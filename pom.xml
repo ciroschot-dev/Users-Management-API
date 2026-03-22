@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.proyecto</groupId>
 	<artifactId>usersProyect</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>usersProyect</name>
-	<description>usersProyect</description>
+	<version>1.0</version>
+	<name>users_management</name>
+	<description>users_management_API</description>
 	<url/>
 	<licenses>
 		<license/>
