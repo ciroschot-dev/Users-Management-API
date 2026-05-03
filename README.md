@@ -1,96 +1,119 @@
+# Users Management API
 
+RESTful user-management API built with Java, Spring Boot, Spring Data JPA and PostgreSQL. The project demonstrates a clean backend CRUD flow with controller, service, repository, entity modeling, custom exceptions and Docker-based deployment.
 
-# 📝 Users Management API
+## Backend highlights
 
-A robust and scalable RESTful API built with **Spring Boot 4.0.2** and **Java 25** to manage user data efficiently. This project follows a clean architecture, implementing the Service layer pattern and proper exception handling. 🏗️
+- CRUD endpoints for user records.
+- Layered architecture with controller, service, repository and model packages.
+- PostgreSQL persistence through Spring Data JPA.
+- Unique username and email constraints at the entity level.
+- Custom `UserNotFoundException`.
+- Global exception handling with `@RestControllerAdvice`.
+- Dockerfile and Docker Compose configuration for local containerized deployment.
+- Environment-variable based database configuration.
 
-### 🌟 Features
+## Tech stack
 
-* **CRUD Operations**: Full support for Creating, Reading, Updating, and Deleting user records.
-* **Data Persistence**: Integrated with **PostgreSQL** using Spring Data JPA for reliable storage.
-* **Global Exception Handling**: Custom error responses (e.g., `UserNotFoundException`) for a better API consumer experience.
-* **Modern Java**: Leverages the latest features of Java 25.
-* **Boilerplate Reduction**: Uses **Lombok** to keep the code clean and maintainable.
+- Java 25
+- Spring Boot 4
+- Spring MVC
+- Spring Data JPA
+- PostgreSQL
+- Docker
+- Docker Compose
+- Maven
+- Lombok
 
----
+## API endpoints
 
-### 🛠️ Tech Stack
+Base URL:
 
-| Technology | Description |
-| --- | --- |
-| **Java 25** | Programming Language |
-| **Spring Boot 4.0.2** | Application Framework |
-| **Spring Data JPA** | ORM / Database Communication |
-| **PostgreSQL** | Relational Database |
-| **Lombok** | Library to reduce boilerplate code |
-| **Maven** | Dependency Management |
-
----
-
-### 🚀 Getting Started
-
-#### 1️⃣ Installation & Setup
-
-Clone the repository to your local machine:
-
-```bash
-git clone https://github.com/Ciro836/Users-Management-API.git
-cd Users-Management-API
-
+```text
+http://localhost:8080
 ```
-
-#### 2️⃣ Database Configuration
-
-Update the `src/main/resources/application.properties` file with your local PostgreSQL credentials:
-
-* **URL**: `jdbc:postgresql://localhost:5432/usersProyect`
-* **User/Password**: Your local PostgreSQL setup.
-
-#### 3️⃣ IDE Configuration (Lombok) 🛠️
-
-This project uses **Lombok** to reduce boilerplate code (like getters and setters). To avoid compilation errors in your IDE:
-
-* **IntelliJ IDEA**: Go to `Settings` > `Build, Execution, Deployment` > `Compiler` > `Annotation Processors` and check **"Enable annotation processing"**.
-* **Plugins**: Ensure the **Lombok plugin** is installed and enabled.
-
-#### 4️⃣ Running the Application
-
-**Option A: Using IntelliJ IDEA**
-
-1. Open the project in **IntelliJ**.
-2. Wait for Maven to download dependencies.
-3. Open `src/main/java/com/proyecto/usersproyect/UsersProyectApplication.java`.
-4. Click the **Run** button ▶️.
-
-**Option B: Using Terminal**
-
-```bash
-./mvnw spring-boot:run
-
-```
-
-*(The project includes the Maven Wrapper, so you don't need to install Maven manually)*.
-
----
-
-### 🛣️ API Endpoints
 
 All endpoints are prefixed with `/user`.
 
 | Method | Endpoint | Description |
 | --- | --- | --- |
-| `POST` | `/user` | Create a new user |
-| `GET` | `/user` | Retrieve all users |
-| `GET` | `/user/{id}` | Get a specific user by ID |
-| `PUT` | `/user/{id}` | Update an existing user |
+| `POST` | `/user` | Create a user |
+| `GET` | `/user` | List all users |
+| `GET` | `/user/{id}` | Find a user by ID |
+| `PUT` | `/user/{id}` | Update a user by ID |
 | `DELETE` | `/user/{id}` | Delete a user by ID |
 
----
+Example request:
 
-### 📦 Project Structure
+```json
+{
+  "username": "ciro",
+  "password": "secure-password",
+  "email": "ciro@example.com"
+}
+```
 
-* **Controller**: Handles HTTP requests.
-* **Service**: Contains business logic (Interface + Implementation).
-* **Model**: JPA Entities (User).
-* **Repository**: Data access layer using JpaRepository.
-* **Exception**: Custom exception logic and global handler.
+## Project structure
+
+```text
+src/main/java/com/proyecto/usersproyect
+|-- controller   # REST endpoints
+|-- exception    # Custom exception and global handler
+|-- model        # JPA entity
+|-- repository   # Spring Data repository
+`-- service      # Business logic and service implementation
+```
+
+## Local setup with Maven
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/ciroschot-dev/Users-Management-API.git
+cd Users-Management-API
+```
+
+### 2. Configure environment variables
+
+```env
+SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/db_users
+SPRING_DATASOURCE_USERNAME=postgres
+SPRING_DATASOURCE_PASSWORD=your_password
+```
+
+### 3. Run the API
+
+```bash
+./mvnw spring-boot:run
+```
+
+## Local setup with Docker
+
+Create a `.env` file:
+
+```env
+DB_USER=postgres
+DB_PASSWORD=your_password
+DB_NAME=db_users
+SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/db_users
+```
+
+Build and start the app with PostgreSQL:
+
+```bash
+docker compose up --build
+```
+
+The API will be available at:
+
+```text
+http://localhost:8080
+```
+
+## What this project demonstrates
+
+- Building CRUD REST APIs with Spring Boot.
+- Modeling persistence with JPA entities and repositories.
+- Separating HTTP, business and persistence concerns.
+- Handling not-found errors with custom exceptions.
+- Running a backend service with Docker and PostgreSQL.
